@@ -1,0 +1,64 @@
+{
+	"rics": [
+		{
+			"ric": "IBM.N",
+			"subtitle": "Ordinary Share - New York Stock Exchange - IBM",
+			"title": "International Business Machines Corp",
+			"type": "EQ"
+		},
+		{
+			"ric": "A",
+			"subtitle": "Ordinary Share - NYSE Consolidated - A",
+			"title": "Agilent Technologies Inc",
+			"type": "EQ"
+		},
+		{
+			"ric": "GOOGL.O",
+			"subtitle": "Ordinary Share - NASDAQ Global Select Consolidated - GOOGL",
+			"title": "Google Inc",
+			"type": "EQ"
+		},
+		{
+			"ric": "AAPL.O",
+			"subtitle": "Ordinary Share - NASDAQ Global Select Consolidated - AAPL",
+			"title": "Apple Inc",
+			"type": "EQ"
+		},
+		{
+			"ric": "0#CL:",
+			"subtitle": "Crude Oil - Commodity Future - New York Mercantile Exchange (NYMEX)",
+			"title": "NYMEX Light Sweet Crude Oil (WTI) Composite Energy Future Chain Contracts",
+			"type": "COM"
+		},
+		{
+			"ric": "0#WTI:",
+			"subtitle": "Commodity Future - ROSARIO FUTURES EXCHANGE",
+			"title": "ROFEX WTI Light Sweet Crude Oil Energy Future Chain Contract",
+			"type": "COM"
+		},
+		{
+			"ric": "THB=",
+			"subtitle": "THOMSON REUTERS",
+			"title": "US Dollar/Thai Baht FX Spot Rate",
+			"type": "FX"
+		},
+		{
+			"ric": "AUD=",
+			"subtitle": "THOMSON REUTERS",
+			"title": "Australian Dollar/US Dollar FX Spot Rate",
+			"type": "FX"
+		},
+		{
+			"ric": ".SPX",
+			"subtitle": "US - Equity Index - MXP",
+			"title": "S&P 500 Index",
+			"type": "INDX"
+		},
+		{
+			"ric": "0#USBMK=",
+			"subtitle": "US BMK YC - THOMSON REUTERS",
+			"title": "United States Government Benchmark Yield Curve",
+			"type": "BMK"
+		}
+	]
+}

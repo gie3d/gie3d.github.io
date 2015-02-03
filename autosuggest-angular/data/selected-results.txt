@@ -1,0 +1,28 @@
+{
+	"list": [
+		{
+			"ric": "005930.KS",
+			"title": "Samsung Electronics Co Ltd"
+		},
+		{
+			"ric": "601857.SS",
+			"title": "PetroChina Co Ltd"
+		},
+		{
+			"ric": "7203.T",
+			"title": "Toyota Motor Corp"
+		},
+		{
+			"ric": "BHP.AX",
+			"title": "BHP Billiton Ltd"
+		},
+		{
+			"ric": "SIEGn.DE",
+			"title": "Siemens AG"
+		},
+		{
+			"ric": "TRI.TO",
+			"title": "Thomson Reuters Corp"
+		}
+	]
+}
