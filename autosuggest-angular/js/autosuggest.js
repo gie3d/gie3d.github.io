@@ -239,11 +239,19 @@
 
 		$scope.isPrevShown = function(){
 			return $scope.currentPage() == 0 ? "disabled" : "enabled";
-		}
+		};
 
 		$scope.isNextShown = function(){
 			return $scope.currentPage() == $scope.totalPages()-1 ? "disabled" : "enabled";
-		}
+		};
+
+		$scope.hasRicToShow = function(){
+			return $scope.displayedRics.list.length > 0
+		};
+
+		$scope.hasMoreThanOnePage = function(){
+			return $scope.totalPages()>=1;
+		};
 
 		$scope.removeAllRics = function(ricnumber){
 			$scope.displayedRics = autoSuggestFactory.removeAllRics();
