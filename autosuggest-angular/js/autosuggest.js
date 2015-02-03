@@ -95,8 +95,69 @@
 
 	var app = angular.module("autoSuggestApp",[]);
 
-	app.controller('autoSugesstCtrl', ['$scope', function($scope){
+	app.factory('autoSuggestFactory', function(){
+		var displayedRics = selectedResult;
+		var currentPage = 0;
+		var pageSize = 5;
+
+		var addRic = function(ric){
+			displayedRics.list.unshift(ric);
+			return displayedRics;
+		}
+		var removeRic = function(i){
+			displayedRics.list.splice(i, 1);
+			return displayedRics;
+		}
+		var removeAllRics = function(){
+			displayedRics = {"list":[]};
+			return displayedRics;
+		}
+		var getDisplayedRics = function(){
+			return displayedRics;
+		}
+		var isRicDup = function(ricnumber){
+			var isDup = false,
+				i = 0, 
+				l = displayedRics.list.length;
+			for (i=0; i<l;i++){
+				if (displayedRics.list[i].ric === ricnumber){
+					isDup = true;
+					break;
+				}
+			}
+
+			return {result: isDup, index: i};
+		}
+		var setPage = function(n){
+			currentPage = n;
+			return currentPage;
+		}
+
+		var getCurrentPage = function(){
+			return currentPage;
+		}
+
+		var totalPages = function(){
+			return Math.ceil(displayedRics.list.length/pageSize);
+		}
+
+		return {
+			addRic: addRic,
+			removeRic: removeRic,
+			removeAllRics: removeAllRics,
+			getDisplayedRics: getDisplayedRics,
+			isRicDup: isRicDup,
+			setPage: setPage,
+			currentPage: currentPage,
+			pageSize: pageSize,
+			totalPages: totalPages,
+			getCurrentPage: getCurrentPage
+		}
+	});
+
+	app.controller('autoSugesstCtrl', ['$scope', 'autoSuggestFactory', function($scope, autoSuggestFactory){
 		$scope.searchRic = function(){
+			$scope.duplicateRicAlert = false;
 			$scope.suggests = [];
 			var stext = $scope.searchText.toLowerCase();
 			console.log(stext)
@@ -106,62 +167,94 @@
 				}
 			}
 			if($scope.suggests.length > 0){
-				$scope.displaySearchBox = true;	
+				$scope.displaySearchBox = true;
+				$scope.searchTextBox = "form-group";
+			}else if ($scope.suggests.length === 0 && $scope.searchText.length === 0){
+				$scope.displaySearchBox = false;
+				$scope.searchTextBox = "form-group";
 			}else{
 				$scope.displaySearchBox = false;
+				$scope.searchTextBox = "form-group has-error";
+			}
+		};
+
+		$scope.addRic = function(ric, title){
+			
+			$scope.displaySearchBox = false;
+
+			//check if ric dup
+			var isDup = autoSuggestFactory.isRicDup(ric);
+			if (isDup.result){
+				//duplicate
+				$scope.duplicateRicAlert = true;
+				$scope.duplicateRic = ric;
+			}else{
+				//not duplicate
+				autoSuggestFactory.addRic({"ric":ric, "title": title});
+				autoSuggestFactory.setPage(0);
 			}
 		};
 
 	}]);
 
-	app.controller('selectedRicsCtrl', ['$scope', function($scope){
-		$scope.displayedRics = selectedResult;
+	app.controller('selectedRicsCtrl', ['$scope', 'autoSuggestFactory', function($scope, autoSuggestFactory){
+		$scope.displayedRics = autoSuggestFactory.getDisplayedRics();
+		$scope.pageSize = autoSuggestFactory.pageSize;		
 
-		$scope.currentPage = 0;
-		$scope.pageSize = 5;
-		
-		$scope.numberOfPage = function(){
-			return Math.ceil($scope.displayedRics.list.length/$scope.pageSize);
-		};
+		$scope.currentPage = function(){
+			return autoSuggestFactory.getCurrentPage();	
+		}
 
-		$scope.range = function(start,end){
-			var ret = [];
-			if (!end){
-				end = start;
-				start = 0;
-			}
-			for (var i=start;i<end;i++){
-				ret.push(i);
-			}
-			return ret;
+		$scope.totalPages = function(){
+			return autoSuggestFactory.totalPages();
 		};
 
 		$scope.setPage = function(){
-			$scope.currentPage = this.n;
-		}
-
-		$scope.nextPage = function(){
-			if ($scope.currentPage < $scope.numberOfPage()-1)
-				$scope.currentPage++;
-		}
-
-		$scope.prevPage = function(){
-			if ($scope.currentPage > 0)
-				$scope.currentPage--;
-		}
-
-		$scope.removeRic = function(ricnumber){
-			for (var i=0,l=$scope.displayedRics.list.length; i<l;i++){
-				if ($scope.displayedRics.list[i].ric === ricnumber)
-					break;
-			}
-			$scope.displayedRics.list.splice(i, 1);
-			if ($scope.currentPage >= $scope.numberOfPage())
-				$scope.prevPage();
+			autoSuggestFactory.setPage(this.n);
 		};
 
+		$scope.nextPage = function(){
+			var currentPage = $scope.currentPage();
+			var totalPages = $scope.totalPages()-1;
+			if (currentPage < totalPages)
+				autoSuggestFactory.setPage(currentPage+1);
+		};
+
+		$scope.prevPage = function(){
+			var currentPage = $scope.currentPage();
+			if (currentPage > 0)
+				autoSuggestFactory.setPage(currentPage-1);
+		};
+
+		$scope.removeRic = function(ric){
+			var currentPage = $scope.currentPage();
+			var totalPages = $scope.totalPages();
+			var isDup = autoSuggestFactory.isRicDup(ric);
+			if (isDup.result){
+				$scope.displayedRics = autoSuggestFactory.removeRic(isDup.index);
+				if (currentPage >= totalPages)
+					$scope.prevPage();
+			}
+		};
+
+		$scope.isPrevShown = function(){
+			return $scope.currentPage() == 0 ? "disabled" : "enabled";
+		}
+
+		$scope.isNextShown = function(){
+			return $scope.currentPage() == $scope.totalPages()-1 ? "disabled" : "enabled";
+		}
+
 		$scope.removeAllRics = function(ricnumber){
-			$scope.displayedRics.list = [];
+			$scope.displayedRics = autoSuggestFactory.removeAllRics();
+		};
+
+		$scope.range = function(end){
+			var ret = [];
+			for (var i=0;i<end;i++){
+				ret.push(i);
+			}
+			return ret;
 		};
 	}]);
 
