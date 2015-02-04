@@ -160,7 +160,7 @@
 			$scope.duplicateRicAlert = false;
 			$scope.suggests = [];
 			var stext = $scope.searchText.toLowerCase();
-			console.log(stext)
+			//console.log(stext)
 			for(var i=0,l=dataSource.rics.length;i<l;i++){
 				if ((dataSource.rics[i].ric.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].subtitle.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].title.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].type.toLowerCase().indexOf(stext) !== -1) && $scope.searchText.length > 0){
 					$scope.suggests.push(dataSource.rics[i]);
