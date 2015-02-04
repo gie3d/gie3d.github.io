@@ -4,6 +4,9 @@
 	<title>AutoSuggest</title>
 	<link rel="stylesheet" href="lib/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.min.css">
+	<script src="lib/angular.min.js"></script>
+	<script src="lib/angular-mock.js"></script>
+	<script src="js/app.min.js"></script>
 </head>
 <body ng-controller="autoSugesstCtrl as autosuggest">
 	<div class="container" style="margin-top:50px;width:700px">
@@ -69,8 +72,5 @@
 			<div ng-if="!hasRicToShow()" align="center">No selected RIC</div>
 		</div>
 	</div>
-	<script src="lib/angular.min.js"></script>
-	<script src="lib/angular-mock.js"></script>
-	<script src="js/app.min.js"></script>
 </body>
 </html>
