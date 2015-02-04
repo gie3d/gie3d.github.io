@@ -228,11 +228,10 @@
 
 		$scope.removeRic = function(ric){
 			var currentPage = $scope.currentPage();
-			var totalPages = $scope.totalPages();
 			var isDup = autoSuggestFactory.isRicDup(ric);
 			if (isDup.result){
 				$scope.displayedRics = autoSuggestFactory.removeRic(isDup.index);
-				if (currentPage >= totalPages)
+				if (currentPage >= $scope.totalPages())
 					$scope.prevPage();
 			}
 		};
@@ -274,13 +273,13 @@
 		}
 	});
 
-	app.filter('highlight', function($sce){
+	app.filter('highlight', ['$sce', function($sce){
 		return function(text, phrase){
 			if (phrase) 
 				text = text.replace(new RegExp('('+phrase+')', 'gi'),'<span class="highlighted">$1</span>')
 
 			return $sce.trustAsHtml(text)
 		}
-	});
+	}]);
 
 })();

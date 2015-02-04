@@ -2,8 +2,8 @@
 <html ng-app="autoSuggestApp">
 <head>
 	<title>AutoSuggest</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/autosuggest.css">
+	<link rel="stylesheet" href="lib/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.min.css">
 </head>
 <body ng-controller="autoSugesstCtrl as autosuggest">
 	<div class="container" style="margin-top:50px;width:700px">
@@ -66,10 +66,11 @@
 					</ul>
 				</nav>
 			</div>
-			<div ng-if="!hasRicToShow" align="center">No selected RIC</div>
+			<div ng-if="!hasRicToShow()" align="center">No selected RIC</div>
 		</div>
 	</div>
-	<script src="js/angular.min.js"></script>
-	<script src="js/autosuggest.js"></script>
+	<script src="lib/angular.min.js"></script>
+	<script src="lib/angular-mock.js"></script>
+	<script src="js/app.min.js"></script>
 </body>
 </html>
