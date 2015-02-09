@@ -58,7 +58,7 @@
 								<span aria-hidden="true">&laquo;</span>
 							</a>
 						</li>
-						<li ng-repeat="n in range(totalPages())" ng-class="{active: n == currentPage()}" ng-click="setPage()">
+						<li ng-repeat="n in range(totalPages())" ng-class="{active: n == currentPage()}" ng-click="setPage(n)">
 							<a href="#">{{n+1}}</a>
 						</li>
 						<li ng-class="isNextShown()" ng-click="nextPage()">
