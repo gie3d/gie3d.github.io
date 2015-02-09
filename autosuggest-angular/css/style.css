@@ -10,3 +10,16 @@
 	-moz-box-shadow: 10px 10px 36px -8px rgba(0,0,0,0.75);
 	box-shadow: 10px 10px 36px -8px rgba(0,0,0,0.75);
 }
+
+.removeRic {
+	cursor: pointer; cursor: hand;
+}
+
+.removeRic:hover {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+.suggestlist:hover {
+	cursor: pointer; cursor: hand;
+}

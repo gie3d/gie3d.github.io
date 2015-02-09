@@ -18,9 +18,9 @@
 				<input type="text" class="form-control" placeholder="Type here to search" ng-model="searchText" ng-change="searchRic()">
 			</div>
 			<div class="autosuggestbox" ng-show="displaySearchBox" class="panel panel-default">
-				<table class="table table-striped table-hover">
+				<table class="table table-hover">
 					<tbody>
-						<tr ng-repeat="suggestlist in suggests" ng-click="addRic(suggestlist.ric, suggestlist.title)">
+						<tr ng-repeat="suggestlist in suggests" ng-click="addRic(suggestlist.ric, suggestlist.title)" class="suggestlist">
 							<td width="200px">
 								<span  ng-bind-html="suggestlist.ric | highlight:searchText"><b>{{suggestlist.ric}}</b></span>
 							</td>
@@ -34,19 +34,19 @@
 			</div>
 		</div>
 		<div ng-controller="selectedRicsCtrl">
-			<table class="table table-striped" ng-if="hasRicToShow()">
+			<table class="table table-hover" ng-if="hasRicToShow()">
 				<thead>
 					<tr>
 						<th width="250px">Title</th>
 						<th width="400px">RIC</th>
-						<th width="50px"><span ng-click="removeAllRics()">X</span></th>
+						<th width="50px"><span ng-click="removeAllRics()" class="removeRic">X</span></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="ricslist in displayedRics.list | startFrom: currentPage()*pageSize | limitTo:pageSize">
 						<td>{{ricslist.title}}</td>
 						<td>{{ricslist.ric}}</td>
-						<td><span ng-click="removeRic(ricslist.ric)">X</span></td>
+						<td><span ng-click="removeRic(ricslist.ric)" class="removeRic">X</span></td>
 					</tr>
 				</tbody>
 			</table>
