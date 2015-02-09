@@ -11,13 +11,10 @@
 	box-shadow: 10px 10px 36px -8px rgba(0,0,0,0.75);
 }
 
-.removeRic {
-	cursor: pointer; cursor: hand;
-}
-
-.removeRic:hover {
+.glyphicon-remove:hover {
 	background-color: #000000;
 	color: #ffffff;
+	cursor: pointer; cursor: hand;
 }
 
 .suggestlist:hover {

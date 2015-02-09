@@ -39,14 +39,14 @@
 					<tr>
 						<th width="250px">Title</th>
 						<th width="400px">RIC</th>
-						<th width="50px"><span ng-click="removeAllRics()" class="removeRic">X</span></th>
+						<th width="50px"><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="removeAllRics()"></span></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="ricslist in displayedRics.list | startFrom: currentPage()*pageSize | limitTo:pageSize">
 						<td>{{ricslist.title}}</td>
 						<td>{{ricslist.ric}}</td>
-						<td><span ng-click="removeRic(ricslist.ric)" class="removeRic">X</span></td>
+						<td><span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="removeRic(ricslist.ric)"></span></td>
 					</tr>
 				</tbody>
 			</table>
