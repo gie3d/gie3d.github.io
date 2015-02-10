@@ -162,16 +162,15 @@
 
 	app.controller('autoSugesstCtrl', ['$scope', 'autoSuggestFactory', function($scope, autoSuggestFactory){
 		
-		$scope.searchRic = function(){
+		$scope.searchRic = function(searchKeyword){
 			
 			$scope.duplicateRicAlert = false;
-
 			var dataSource = autoSuggestFactory.getDataSource();
 			$scope.suggests = [];
-			var stext = $scope.searchText.toLowerCase();
+			searchKeyword = searchKeyword.toLowerCase();
 			
 			for(var i=0,l=dataSource.rics.length;i<l;i++){
-				if ((dataSource.rics[i].ric.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].subtitle.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].title.toLowerCase().indexOf(stext) !== -1 || dataSource.rics[i].type.toLowerCase().indexOf(stext) !== -1) && $scope.searchText.length > 0){
+				if ((dataSource.rics[i].ric.toLowerCase().indexOf(searchKeyword) !== -1 || dataSource.rics[i].subtitle.toLowerCase().indexOf(searchKeyword) !== -1 || dataSource.rics[i].title.toLowerCase().indexOf(searchKeyword) !== -1 || dataSource.rics[i].type.toLowerCase().indexOf(searchKeyword) !== -1) && searchKeyword.length > 0){
 					$scope.suggests.push(dataSource.rics[i]);
 				}
 			}
@@ -186,11 +185,14 @@
 				$scope.displaySearchBox = false;
 				$scope.searchTextBox = "form-group has-error";
 			}
+
+			return $scope.suggests;
 		};
 
 		$scope.addRic = function(ric, title){
 			
 			$scope.displaySearchBox = false;
+			$scope.duplicateRicAlert = false;
 
 			//check if ric dup
 			var isDup = autoSuggestFactory.isRicDup(ric);
