@@ -5,21 +5,99 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="styles/bootstrap-custom-flatty.css">
 	<link rel="stylesheet" href="styles/app.css">
-
+	<link rel="stylesheet" href="bower_components/chartist/dist/chartist.min.css">
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="js/utils.js"></script>
 </head>
 <body>
 
-	<div id="template_navicon"></div>
+	<div id="template_navtext"></div>
 	<div class="container">
-		
-		<footer class="footer"></footer>
+		<div class="row">
+			<div class="col-xs-4 tab-medium tab-active" id="tabSummary">
+				SUMMARY
+			</div>
+			<div class="col-xs-4 tab-medium" id="tabTransaction">
+				TRANSACTION
+			</div>
+			<div class="col-xs-4 tab-medium" id="tabStatistic">
+				STATISTIC
+			</div>
+		</div>
+		<div id="porfolioContainer"></div>
 	</div>
+	<footer class="footer"></footer>
+	<script src="bower_components/chartist/dist/chartist.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			Utils.loadTemplateIcon('#template_navicon', 'nav_icon.html', 'portfolio');
+			Utils.loadTemplateText('#template_navtext', 'nav_text.html', {
+				backLink: 'jsback',
+				title: 'Portfolio',
+				searchLink: 'search.html'
+			});
 			Utils.loadTemplate('footer', 'footer.html');
+
+			var removeTabActive = function() {
+				$('#tabSummary').removeClass('tab-active');
+				$('#tabTransaction').removeClass('tab-active');
+				$('#tabStatistic').removeClass('tab-active');
+			}
+
+			var loadSummary = function() {
+				removeTabActive();
+				$('#tabSummary').addClass('tab-active');
+				$('#porfolioContainer').load('templates/portfolio_summary.html', function() {
+					// chart
+					var data = {
+						series: [5, 5, 4]
+					};
+
+					var sum = function(a, b) { return a + b };
+
+					new Chartist.Pie('#chartContainer', data, {
+						labelInterpolationFnc: function(value) {
+							return Math.round(value / data.series.reduce(sum) * 100) + '%';
+						}
+					});
+				});
+			}
+
+			var loadTransaction = function() {
+				removeTabActive();
+				$('#tabTransaction').addClass('tab-active');
+				$('#porfolioContainer').load('templates/portfolio_transaction.html');
+			}
+
+			var loadStatistic = function() {
+				removeTabActive();
+				$('#tabStatistic').addClass('tab-active');
+				$('#porfolioContainer').load('templates/portfolio_statictic.html', function() {
+					// chart
+					new Chartist.Line('#chartContainer', {
+						labels: [1, 2, 3, 4, 5, 6, 7, 8],
+						series: [
+						[5, 9, 7, 8, 5, 3, 5, 4]
+						]
+					}, {
+						low: 0,
+						showArea: true
+					});
+				});
+			}
+
+			loadSummary();
+
+			$('#tabSummary').on('click', function() {
+				loadSummary();
+			});
+
+			$('#tabTransaction').on('click', function() {
+				loadTransaction();
+			});
+
+			$('#tabStatistic').on('click', function() {
+				loadStatistic();
+			});
 		});
 	</script>
 </body>

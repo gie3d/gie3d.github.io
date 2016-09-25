@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.7",
-    "pure": "~0.6.0"
+    "pure": "~0.6.0",
+    "chartist": "~0.9.8"
   }
 }
