@@ -58,7 +58,11 @@ var Utils = (function() {
 				$(this).removeClass('row-hover');
 				var targetLink = this.getAttribute('data-link-file');
 				if (targetLink) {
-					window.location = window.location.origin + '/' + targetLink;
+					if (window.location.origin.indexOf('gie3d.github.io') !== -1) {
+						window.location = window.location.origin + '/finExpert/' + targetLink;
+					} else {
+						window.location = window.location.origin + '/' + targetLink;
+					}
 				}
 			}
 		});
