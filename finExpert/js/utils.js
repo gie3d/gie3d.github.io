@@ -17,7 +17,11 @@ var Utils = (function() {
 			}
 
 			$('#navtext_title').text(params.title);
-			$('#navtext_searchlink').attr('href', params.searchLink);
+			if (params.searchLink === undefined) {
+				$('#navtext_searchlink').hide();
+			} else {
+				$('#navtext_searchlink').attr('href', params.searchLink);
+			}
 		});
 	};
 
@@ -27,6 +31,8 @@ var Utils = (function() {
 				$('#navicon_home').addClass('active-icon');
 			} else if (activePage === 'portfolio') {
 				$('#navicon_portfolio').addClass('active-icon');
+			} else if (activePage === 'search') {
+				$('#navicon_search').addClass('active-icon');
 			}
 		});
 	};
@@ -42,11 +48,28 @@ var Utils = (function() {
 		return vars;
 	}
 
+	var tableViewOnTouch = function(rowsSelector) {
+		$(rowsSelector).on('touchstart', function(e) {
+			$(this).addClass('row-hover');
+		}).on('touchmove', function(e) {
+			$(this).removeClass('row-hover');
+		}).on('touchend', function(e) {
+			if (this.classList.contains('row-hover')) {
+				$(this).removeClass('row-hover');
+				var targetLink = this.getAttribute('data-link-file');
+				if (targetLink) {
+					window.location = window.location.origin + '/' + targetLink;
+				}
+			}
+		});
+	}
+
 	var publicAPI = {
 		loadTemplate: loadTemplate,
 		loadTemplateText: loadTemplateText,
 		loadTemplateIcon: loadTemplateIcon,
-		getUrlVars: getUrlVars
+		getUrlVars: getUrlVars,
+		tableViewOnTouch: tableViewOnTouch
 	}
 
 	return publicAPI;

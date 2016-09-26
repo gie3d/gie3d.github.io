@@ -85,7 +85,16 @@
 				});
 			}
 
-			loadSummary();
+			var urlVars = Utils.getUrlVars();
+			var template = urlVars.template;
+			if (template === 'transaction') {
+				loadTransaction();
+			} else if (template === 'statistic') {
+				loadStatistic();
+			} else {
+				loadSummary();	
+			}
+			
 
 			$('#tabSummary').on('click', function() {
 				loadSummary();

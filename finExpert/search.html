@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FinExpert | Search</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="styles/bootstrap-custom-flatty.css">
+	<link rel="stylesheet" href="styles/app.css">
+
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="js/utils.js"></script>
+</head>
+<body>
+
+	<div id="template_navtext"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12" style="background-color: #666666;">
+				<div style="padding: 6px 6px 6px 6px;">
+					<input type="text" class="form-control" placeholder="Search" id="searchTextbox">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<table class="table table-bordered" id="mainTable">
+				<tbody>
+					<tr data-link-file="portfolio.html?template=summary">
+						<td>
+							<div>Porfolio | Summary</div>
+							<div class="number-label" style="font-size: 10px">porfolio</div>
+						</td>
+					</tr>
+					<tr data-link-file="portfolio.html?template=transaction">
+						<td>
+							<div>Porfolio | Transaction</div>
+							<div class="number-label" style="font-size: 10px">porfolio</div>
+						</td>
+					</tr>
+					<tr data-link-file="portfolio.html?template=statistic">
+						<td>
+							<div>Porfolio | Statistic</div>
+							<div class="number-label" style="font-size: 10px">porfolio</div>
+						</td>
+					</tr>
+					<tr data-link-file="home_read2.html">
+						<td>
+							<div>Cash cow | Strategy</div>
+							<div class="number-label" style="font-size: 10px">home</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer class="footer"></footer>
+	</div>
+	<script>
+		$(document).ready(function() {
+			Utils.loadTemplateText('#template_navtext', 'nav_text.html', {
+				backLink: 'jsback',
+				title: 'Search'
+			});
+
+			Utils.loadTemplate('footer', 'footer.html');
+
+			$('#mainTable').hide();
+
+			$('#searchTextbox').keyup(function(e) {
+				if (this.value.length) {
+					$('#mainTable').show();
+				} else {
+					$('#mainTable').hide();					
+				}
+			});
+
+			Utils.tableViewOnTouch('tr');
+		});
+	</script>
+</body>
+</html>

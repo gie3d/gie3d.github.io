@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FinExpert | Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="styles/bootstrap-custom-flatty.css">
+	<link rel="stylesheet" href="styles/app.css">
+
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="js/utils.js"></script>
+</head>
+<body>
+
+	<div id="template_navtext"></div>
+	<div style="width: 100%">
+		<img src="images/read2_hero.jpg" class="img-responsive">
+	</div>
+	<div class="container" style="font-size: 16px">
+		<div class="row row-gap">
+			<div class="col-xs-12">
+				<b>Cash cow</b> is business jargon for a business venture that generates a steady return of profits that far exceed the outlay of cash required to acquire or start it. Many businesses attempt to create or acquire such ventures, since they can be used to boost a company's overall income and to support less profitable endeavors.
+			</div>
+		</div>
+		<div class="row row-gap">
+			<div class="col-xs-12">
+				<br>
+				<b>Origin</b>
+				<br>
+				The term cash cow is a metaphor for a "dairy cow" used on farms to produce milk, offering a steady stream of income with little maintenance. The BCG growth-share matrix developed by the Boston Consulting Group coined the term "cash cow" to describe business units experiencing high market share and operating in a mature industry with slow growth rates.
+			</div>
+		</div>
+		<div class="row row-gap">
+			<div class="col-xs-12">
+				<br>
+				<b>Usage</b>
+				<br>
+				Cash cows are products or services that have achieved market leader status, provide positive cash flows and a return on assets (ROA) that exceeds the market growth rate. The idea is that such products produce profits long after the initial investment has been recouped. By generating steady streams of income, cash cows help fund the overall growth of a company, their positive effects spilling over to other business units. Furthermore, companies can use them as leverage for future expansions, as lenders are more willing to lend money knowing that the debt will be serviced.
+				<br><br>
+				Cash cows can be also used to buy back shares already on the market or increase the dividends paid to shareholders.
+				<br><br>
+				They usually bring in cash for years, until new technology or shifting market preferences renders them obsolete.
+			</div>
+		</div>
+		<div class="row row-gap">
+			<div class="col-xs-12">
+				<br>
+				<b>Disadvantage</b>
+				<br>
+				Cash cows can act as barriers to entry to the market for new products, as entrants need to invest heavily in order to achieve the brand awareness required to capture a significant share of the market away from the dominant players. A higher pay out rate of earning in the form of share repurchase or cash/share dividend might also increase the risk of future dividend cut and is an indication of lack of grow opportunity.
+				<br><br>
+				Since the business unit can maintain profits with little maintenance or investment, a cash cow can also be used to describe a profitable but complacent company or business unit.
+			</div>
+		</div>
+		<footer class="footer"></footer>
+	</div>
+	<script>
+		$(document).ready(function() {
+			Utils.loadTemplateText('#template_navtext', 'nav_text.html', {
+				backLink: 'jsback',
+				title: 'Home',
+				searchLink: 'search.html'
+			});
+
+			Utils.loadTemplate('footer', 'footer.html');
+		});
+	</script>
+</body>
+</html>
